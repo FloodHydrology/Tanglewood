@@ -30,8 +30,6 @@ p<-"+proj=utm +zone=16 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 streams<-st_read(paste0(data_dir,"/streams.shp")) %>% st_transform(., crs=4326) %>% st_zm(.) 
 field<-st_read(paste0(data_dir,"/House Field.shp")) %>% st_transform(., crs=4326) %>% st_zm(.)
 property<-st_read(paste0(data_dir,"/Tanglewood.shp")) %>% st_transform(., crs=4326) %>% st_zm(.)
-dem_<-raster(paste0(data_dir, "topo/Moundville West.tif"))
-
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #2.0 Map========================================================================
@@ -55,4 +53,7 @@ m<- leaflet(property) %>%
                                      "property boundary"
                                      
                    ))
+
+htmlwidgets::saveWidget(m, "initial_watershed_map.html")
+
 
