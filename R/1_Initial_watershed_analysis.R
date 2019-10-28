@@ -150,4 +150,10 @@ m<-leaflet(property) %>%
                                      "Experimental Field",
                                      "Biological Station Boundary"))
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#4.0 Export Products-----------------------------------------------------------
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#Export headwater watersheds
+watershed %>% st_transform(., p) %>% st_write(., paste0(data_dir,"paired_watershed.shp"))
+
 
