@@ -12,8 +12,8 @@
 rm(list=ls(all=TRUE))
 
 #Defin relevant working directories
-data_dir<-"C://Tanglewood_GIS//spatial_data//"
-working_dir<-"C://Workspace//"
+data_dir<-"C://Users//cnjones7//Box Sync//My Folders//Research Projects//Tanglewood//spatial_data//"
+working_dir<-"C://Workspace//Scratch//"
 
 #Download packages 
 library(htmlwidgets)
@@ -60,12 +60,12 @@ wbt_breach_depressions(dem = paste0(working_dir, "dem_fill.tif"),
                        output = paste0(working_dir, "dem_breach.tif"))
 
 #Create flow accumulation 
-wbt_d8_flow_accumulation(dem = paste0(working_dir, "dem_breach.tif"), 
+wbt_d8_flow_accumulation(input = paste0(working_dir, "dem_breach.tif"), 
                           output = paste0(working_dir, "fac.tif"))
 
 #Create flow direction 
 wbt_d8_pointer(dem = paste0(working_dir, "dem_breach.tif"), 
-                            output = paste0(working_dir, "fdr.tif"))
+               output = paste0(working_dir, "fdr.tif"))
 
 #2.2 Manually create Pout Points~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #Read fac into R environment
@@ -110,6 +110,12 @@ watershed<-raster(paste0(working_dir, "ws_paired.tif")) %>% st_as_stars() %>% st
   watershed_a<-watershed[1,]
   watershed_b<-watershed[2,]
 watershed_c<-raster(paste0(working_dir, "ws_creek.tif")) %>% st_as_stars() %>% st_as_sf(., merge = TRUE)
+
+#Export to workspace
+st_write(watershed_a, paste0(working_dir, "watershed_a.shp"))
+st_write(watershed_b, paste0(working_dir, "watershed_b.shp"))
+st_write(watershed_c, paste0(working_dir, "watershed_C.shp"))
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #3.0 Create Leaflet Map---------------------------------------------------------
